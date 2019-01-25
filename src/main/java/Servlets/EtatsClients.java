@@ -43,7 +43,8 @@ public class EtatsClients extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EtatsClients</title>");            
+            out.println("<title>Servlet EtatsClients</title>"); 
+            out.println("<style type=\"text/css\">td,th{border:1px solid black} </style>");
             out.println("</head>");
             out.println("<body>");
             try {   // Trouver la valeur du paramètre HTTP state
@@ -51,7 +52,6 @@ public class EtatsClients extends HttpServlet {
                 if (state == null) {
                     throw new Exception("La paramètre codeEtat n'a pas été transmis");
                 }
- 
                 DAO dao = new DAO(DataSourceFactory.getDataSource());
                 List<CustomerEntity> listCustomer = dao.customersInState(state);
                 if (listCustomer.isEmpty()) {

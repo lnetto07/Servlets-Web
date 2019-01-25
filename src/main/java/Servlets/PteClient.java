@@ -1,5 +1,5 @@
 package Servlets;
- 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import simplejdbc.CustomerEntity;
 import simplejdbc.DAO;
 import simplejdbc.DataSourceFactory;
- 
+
 @WebServlet(name = "PropriétésClient", urlPatterns = {"/PropriétésClient"})
 public class PteClient extends HttpServlet {
- 
+
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -25,7 +26,7 @@ public class PteClient extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -41,7 +42,7 @@ public class PteClient extends HttpServlet {
                 }
                 // on doit convertir cette valeur en entier (attention aux exceptions !)
                 int customerID = Integer.valueOf(val);
- 
+
                 DAO dao = new DAO(DataSourceFactory.getDataSource());
                 CustomerEntity customer = dao.findCustomer(customerID);
                 if (customer == null) {
@@ -49,9 +50,9 @@ public class PteClient extends HttpServlet {
                 }
                 // Afficher les propriétés du client         
                 out.printf("Customer n° %d <br> name: %s <br> address: %s",
-                    customerID,
-                    customer.getName(),
-                    customer.getAddressLine1());
+                        customerID,
+                        customer.getName(),
+                        customer.getAddressLine1());
             } catch (Exception e) {
                 out.printf("Erreur : %s", e.getMessage());
             }
@@ -62,7 +63,7 @@ public class PteClient extends HttpServlet {
             Logger.getLogger("servlet").log(Level.SEVERE, "Erreur de traitement", ex);
         }
     }
- 
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -73,10 +74,10 @@ public class PteClient extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
- 
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -87,10 +88,10 @@ public class PteClient extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
- 
+
     /**
      * Returns a short description of the servlet.
      *
@@ -100,5 +101,5 @@ public class PteClient extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
- 
+
 }
